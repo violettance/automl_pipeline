@@ -1,1 +1,2 @@
 # reset terminal: streamlit run app.py
+# environment change: conda activate slit

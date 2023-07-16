@@ -3,17 +3,20 @@ import pandas as pd
 import os
 
 # Import profiling capabilities
-import pandas_profiling
-from pandas_profiling import ProfileReport
+# import ydata_profiling
+from ydata_profiling import ProfileReport
 from streamlit_pandas_profiling import st_profile_report
 
 # Import ML capabilities
 from pycaret.classification import setup, compare_models, pull, save_model
 
+# Import data cleaning capabilities
+import gradio as gr
+
 with st.sidebar:
     st.image("logo.png")
     st.title("AutoMl Tool")
-    choice = st.radio("Navigation", ["Upload", "Profiling", "ML", "Download"])
+    choice = st.radio("Navigation", ["Upload", "EDA","Cleaning", "ML","Visualization", "Download"])
     st.info("This application allows you to build an automated ML pipeline using Streamlit, Pandas Profiling, and PyCaret")
 
 df = None  # Initialize the df variable
@@ -29,13 +32,21 @@ if choice == "Upload":
         df.to_csv("sourcedata.csv", index=None)
         st.dataframe(df)
 
-if choice == "Profiling":
+if choice == "EDA":
     if df is not None:  # Check if df is defined
         st.title("Automated Exploratory Data Analysis")
         profile_report = ProfileReport(df)
         st_profile_report(profile_report)
     else:
         st.warning("Please upload a dataset first to perform profiling.")
+
+if choice == "Cleaning":
+    st.title("Data Cleaning")
+    if st.button("Clean Data"):
+        pass
+
+if  choice =="Visualization":
+    pass
 
 if choice == "ML":
     if df is not None and not df.empty:  # Check if df is defined and not empty
