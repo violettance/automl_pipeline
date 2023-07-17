@@ -11,12 +11,15 @@ from streamlit_pandas_profiling import st_profile_report
 from pycaret.classification import setup, compare_models, pull, save_model
 
 # Import data cleaning capabilities
-import gradio as gr
+
+# Import data visualization capabilities
+import pygwalker as pyg
+import streamlit.components.v1 as components
 
 with st.sidebar:
     st.image("logo.png")
     st.title("AutoMl Tool")
-    choice = st.radio("Navigation", ["Upload", "EDA","Cleaning", "ML","Visualization", "Download"])
+    choice = st.radio("Navigation", ["Upload", "Profile Report", "ML","Visualization", "Download"])
     st.info("This application allows you to build an automated ML pipeline using Streamlit, Pandas Profiling, and PyCaret")
 
 df = None  # Initialize the df variable
@@ -32,7 +35,7 @@ if choice == "Upload":
         df.to_csv("sourcedata.csv", index=None)
         st.dataframe(df)
 
-if choice == "EDA":
+if choice == "Profile Report":
     if df is not None:  # Check if df is defined
         st.title("Automated Exploratory Data Analysis")
         profile_report = ProfileReport(df)
@@ -40,13 +43,14 @@ if choice == "EDA":
     else:
         st.warning("Please upload a dataset first to perform profiling.")
 
-if choice == "Cleaning":
-    st.title("Data Cleaning")
-    if st.button("Clean Data"):
-        pass
 
 if  choice =="Visualization":
-    pass
+    if df is not None:
+        st.title("Data Visualization with Pygwalker")
+        pyg_html = pyg.walk(df, return_html=True) # Generate the HTML using Pygwalker
+        components.html(pyg_html, width=1000, height=1000, scrolling=True)# Embed the generated HTML into the Streamlit app
+    else:
+        st.warning("Please upload a dataset first to perform visualization.")
 
 if choice == "ML":
     if df is not None and not df.empty:  # Check if df is defined and not empty
@@ -64,7 +68,17 @@ if choice == "ML":
     else:
         st.warning("Please upload a dataset first to perform ML.")
 
-if choice == "Download": 
-    with open('best_model.pkl.pkl', 'rb') as f: 
-        st.download_button('Download Model', f, file_name="best_model.pkl")
+
+if choice == "Download":
+    if df is not None and not df.empty:  # Check if df is defined and not empty
+        st.title("Download ML")
+        if os.path.exists('best_model.pkl'):
+            with open('best_model.pkl', 'rb') as f: 
+                st.download_button('Download Model', f, file_name="best_model.pkl")
+        else:
+            st.warning("Please train a model first.")
+    else:
+        st.warning("Please upload a dataset first to perform the download.")
+
+
         
