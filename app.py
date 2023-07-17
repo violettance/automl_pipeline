@@ -3,14 +3,13 @@ import pandas as pd
 import os
 
 # Import profiling capabilities
-# import ydata_profiling
+import ydata_profiling
 from ydata_profiling import ProfileReport
 from streamlit_pandas_profiling import st_profile_report
 
 # Import ML capabilities
 from pycaret.classification import setup, compare_models, pull, save_model
 
-# Import data cleaning capabilities
 
 # Import data visualization capabilities
 import pygwalker as pyg
