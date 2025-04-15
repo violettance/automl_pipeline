@@ -7,3 +7,4 @@ pygwalker==0.1.11
 # Pinned dependencies to resolve known compatibility issues
 numba==0.58.1
 joblib==1.2.0
+matplotlib==3.7.5
