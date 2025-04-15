@@ -9,15 +9,16 @@ This Streamlit app simplifies your ML workflow by combining automated EDA with P
 
 2. Install the required packages by running the following command:
 
-```bash
-pip install -r requirements.txt
-```**Note:** It is recommended to create a virtual environment before installing the dependencies.
+   ```bash
+   pip install -r requirements.txt
+   ```
+   **Note:** It is recommended to create a virtual environment before installing the dependencies.
 
 3. Run the application by executing the following command:
 
-```
-streamlit run app.py
-```
+   ```bash
+   streamlit run app.py
+   ```
 
 4. The application will open in your default browser.
 
