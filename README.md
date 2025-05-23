@@ -1,7 +1,8 @@
 # AutoML Tool
 
-This Streamlit app simplifies your ML workflow by combining automated EDA with Pandas Profiling, interactive visualizations through Pygwalker, and AutoML-based classification modeling using PyCaret — all in one place.
+This Streamlit app simplifies your ML workflow by combining automated EDA with Pandas Profiling, interactive visualizations through Pygwalker, and AutoML-based classification modeling using PyCaret - all in one place.
 
+![AutoML Tool](image.png)
 
 ## Installation
 
